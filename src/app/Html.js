@@ -16,3 +16,4 @@ class Html extends Component {
 		)
 	}
 }
+export default Html

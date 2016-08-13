@@ -4,7 +4,9 @@
   "description": "A webpack build setup",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development webpack-dev-server --config webpack/config.dev.client.js"
+    "start:dev": "NODE_ENV=development webpack-dev-server --config webpack/config.dev.client.js",
+    "lint":"eslint './src/**' --ext .js --ext .jsx --ignore-path .gitignore --cache",
+    "check":"npm run lint"
   },
   "repository": {
     "type": "git",
