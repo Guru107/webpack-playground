@@ -1,0 +1,24 @@
+{
+  "name": "webpack-playground",
+  "version": "1.0.0",
+  "description": "A webpack build setup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guru107/webpack-playground.git"
+  },
+  "keywords": [
+    "webpack",
+    "react",
+    "redux"
+  ],
+  "author": "Gurudatt",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/Guru107/webpack-playground/issues"
+  },
+  "homepage": "https://github.com/Guru107/webpack-playground#readme"
+}
