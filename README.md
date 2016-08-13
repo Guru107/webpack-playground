@@ -1,7 +1,7 @@
 # webpack-playground
 Webpack
 
-![Alt](https://david-dm.org/Guru107/webpack-playground.svg "DEP")
+[![dependencies Status](https://david-dm.org/Guru107/webpack-playground/status.svg)](https://david-dm.org/Guru107/webpack-playground)  [![devDependencies Status](https://david-dm.org/Guru107/webpack-playground/dev-status.svg)](https://david-dm.org/Guru107/webpack-playground?type=dev)
 
 Its not about the app
 
