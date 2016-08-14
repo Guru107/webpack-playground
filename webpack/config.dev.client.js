@@ -1,7 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-
+var WebpackBrowserPlugin = require('webpack-browser-plugin');
 const PATHS = {
 	SRC:path.join(__dirname,'..','src'),
 	CLIENT:path.join(__dirname,'..','src/client'),
@@ -91,6 +91,12 @@ module.exports = {
   				mobile:true,
   				inject:true
   			}),
+  			new webpack.DefinePlugin({
+  				'__DEV__':JSON.stringify(true),
+  				'__CLIENT__':JSON.stringify(true),
+  				'__SERVER__':JSON.stringify(false)
+  			}),
+  			new WebpackBrowserPlugin()
 
   	]
 }
