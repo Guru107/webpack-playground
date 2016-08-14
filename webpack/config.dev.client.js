@@ -62,7 +62,7 @@ module.exports = {
 	output:{
 		path:PATHS.BUILD,
 		publicPath:'/',
-		filename:'[name].bundle.js',
+		filename:'bundle.js',
 		//Don't use it in production
 		//Includes comments with info about the module
 		pathinfo:true
