@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-require('../../styles/app/index.less')
+require('app/index')
 class IndexPage extends Component {
 	render(){
 		return (

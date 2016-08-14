@@ -31,6 +31,7 @@ module.exports = {
 	//Don't use in production
 	bail:true,
 	resolve:{
+		extensions:['','.js','.less'],
 		root:[
 			PATHS.CLIENT,
 			PATHS.APP,
@@ -45,7 +46,8 @@ module.exports = {
 			PATHS.CLIENT,
 			PATHS.APP,
 			PATHS.SERVER,
-			PATHS.NODE_MODULES
+			PATHS.NODE_MODULES,
+			PATHS.STYLES
 
 		]
 	},
