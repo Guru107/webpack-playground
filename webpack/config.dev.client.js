@@ -1,7 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var WebpackBrowserPlugin = require('webpack-browser-plugin');
+var precss       = require('precss')
+var autoprefixer = require('autoprefixer')
 const PATHS = {
 	SRC:path.join(__dirname,'..','src'),
 	CLIENT:path.join(__dirname,'..','src/client'),
@@ -13,6 +14,7 @@ const PATHS = {
 }
 
 module.exports = {
+	target:'web',
 	context:PATHS.SRC,
 	devtool: 'eval-source-map',
 	entry:[PATHS.CLIENT,'webpack-dev-server/client?http://localhost:8080'],
@@ -77,12 +79,24 @@ module.exports = {
   		],
   		loaders:[
   			{
+  				test:/\.less$/,
+  				loader:'style!css!less?lint&noIeCompat&strictImports&strictUnits!postcss-loader?sourceMap=inline&pack=cleaner',
+  				exclude:['/node_modules/',PATHS.SRC],
+  				include:PATHS.STYLES
+  			},
+  			{
   				test:/\.js$/,
   				include: PATHS.SRC,
   				loader:'react-hot!babel?presets[]=es2015,presets[]=react',
   				exclude:['/node_modules/']
   			}
   		],
+  	},
+  	postcss:function(){
+  		return {
+  			defaults: [precss, autoprefixer],
+  			 cleaner:  [autoprefixer()]
+  		}
   	},
   	plugins:[
   			new webpack.optimize.OccurenceOrderPlugin(),
@@ -96,9 +110,6 @@ module.exports = {
   				'__DEV__':JSON.stringify(true),
   				'__CLIENT__':JSON.stringify(true),
   				'__SERVER__':JSON.stringify(false)
-  			}),
-  			new WebpackBrowserPlugin({
-  				url:'http://localhost'
   			})
 
   	]

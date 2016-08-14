@@ -1,9 +1,9 @@
 import React,{ Component } from 'react'
-
+require('../../styles/app/index.less')
 class IndexPage extends Component {
 	render(){
 		return (
-			<div>Home Page</div>
+			<div className='label'>Home Page</div>
 		)
 	}
 }
