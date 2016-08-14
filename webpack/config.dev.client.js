@@ -51,7 +51,10 @@ module.exports = {
 	profile:true,
 	//Cache generated modules and chunks to improve performance for multiple incremental builds.
 	cache:true,
-	recordsPath:PATHS.BUILD,
+	//Commented recordsPath as it generated an asset json which is not needed as OrderOccurancePlugin
+	//Solves the problem of bundling the files in the same order
+	//Either use recordsPath or OrderOccurancePlugin not both
+	//recordsPath:PATHS.BUILD+'/asset.json',
 	output:{
 		path:PATHS.BUILD,
 		publicPath:'/',
