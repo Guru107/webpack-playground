@@ -7,21 +7,58 @@ const PATHS = {
 	CLIENT:path.join(__dirname,'..','src/client'),
 	SERVER:path.join(__dirname,'..','src/server'),
 	STYLES:path.join(__dirname,'..','styles'),
-	BUILD:path.join(__dirname,'..','build')
+	BUILD:path.join(__dirname,'..','build'),
+	APP:path.join(__dirname,'..','src/app'),
+	NODE_MODULES:path.join(__dirname,'..','node_modules')
 }
 
 module.exports = {
+	context:PATHS.SRC,
 	devtool: 'eval-source-map',
 	entry:[PATHS.CLIENT,'webpack-dev-server/client?http://localhost:8080'],
 	devServer:{
+		contentBase:'./build',
 		hot:true,
 		historyApiFallback: true,
-		info:true,
+		info:false,
 		inline: true,
 		progress: true
 	},
+	//Report first error as hard error
+	//Breaks the build on first error
+	//Don't use in production
+	bail:true,
+	resolve:{
+		root:[
+			PATHS.CLIENT,
+			PATHS.APP,
+			PATHS.SERVER
+		],
+		alias:{
+			'app$':PATHS.APP,
+			'client$':PATHS.CLIENT,
+			'server$':PATHS.SERVER
+		},
+		modulesDirectories:[
+			PATHS.CLIENT,
+			PATHS.APP,
+			PATHS.SERVER,
+			PATHS.NODE_MODULES
+
+		]
+	},
+	//Capture timing information for each module.
+	profile:true,
+	//Cache generated modules and chunks to improve performance for multiple incremental builds.
+	cache:true,
+	recordsPath:PATHS.BUILD,
 	output:{
-		path:PATHS.BUILD
+		path:PATHS.BUILD,
+		publicPath:'/',
+		filename:'[name].bundle.js',
+		//Don't use it in production
+		//Includes comments with info about the module
+		pathinfo:true
 	},
 	eslint: {
     	configFile: path.join(__dirname,'..','.eslintrc')
