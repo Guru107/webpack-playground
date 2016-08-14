@@ -97,7 +97,9 @@ module.exports = {
   				'__CLIENT__':JSON.stringify(true),
   				'__SERVER__':JSON.stringify(false)
   			}),
-  			new WebpackBrowserPlugin()
+  			new WebpackBrowserPlugin({
+  				url:'http://localhost'
+  			})
 
   	]
 }
