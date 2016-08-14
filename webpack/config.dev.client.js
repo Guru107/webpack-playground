@@ -92,6 +92,7 @@ module.exports = {
   				inject:true
   			}),
   			new webpack.DefinePlugin({
+  				'__PROD__':JSON.stringify(false),
   				'__DEV__':JSON.stringify(true),
   				'__CLIENT__':JSON.stringify(true),
   				'__SERVER__':JSON.stringify(false)
