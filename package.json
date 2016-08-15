@@ -4,9 +4,11 @@
   "description": "A webpack build setup",
   "main": "index.js",
   "scripts": {
+  	"clean":"rimraf build",
     "start:dev": "NODE_ENV=development webpack-dev-server --config webpack/config.dev.client.js",
-    "start:server":"NODE_ENV=development webpack --config webpack/config.dev.server.js && node build/backend.js",
-    "start":"webpack --config webpack/config.dev.client.js && webpack --config webpack/config.dev.server.js && node build/backend.js",
+    "start:prod":"cross-env NODE_ENV=production webpack -p --config webpack/config.prod.client.js",
+    "start:server": "NODE_ENV=development webpack --config webpack/config.dev.server.js && node build/backend.js",
+    "start": "webpack --config webpack/config.dev.client.js && webpack --config webpack/config.dev.server.js && node build/backend.js",
     "lint": "eslint './src/**' --ext .js --ext .jsx --ignore-path .gitignore --cache",
     "check": "npm run lint"
   },

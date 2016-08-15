@@ -44,7 +44,7 @@ module.exports = {
 			{
   				test:/\.js$/,
   				include: PATHS.SRC,
-  				loader:'babel?presets[]=es2015,presets[]=react',
+  				loader:'react-hot!babel?presets[]=es2015,presets[]=react',
   				exclude:['/node_modules/']
   			}
 		]
@@ -80,8 +80,8 @@ module.exports = {
 	plugins:[
   			new webpack.optimize.OccurenceOrderPlugin(),
   			new webpack.DefinePlugin({
-  				'__PROD__':JSON.stringify(true),
-  				'__DEV__':JSON.stringify(false),
+  				'__PROD__':JSON.stringify(false),
+  				'__DEV__':JSON.stringify(true),
   				'__CLIENT__':JSON.stringify(false),
   				'__SERVER__':JSON.stringify(true)
   			}),
