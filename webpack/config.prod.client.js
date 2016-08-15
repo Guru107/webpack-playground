@@ -72,33 +72,31 @@ module.exports = {
   		}
   	},
 	profile:true,
-	  	plugins:[
-  			new webpack.optimize.OccurenceOrderPlugin(),
-  			new webpack.optimize.DedupePlugin(),
-  			new webpack.optimize.UglifyJsPlugin({
-  				compress:{
-  					warnings:false,
-  					drop_console:true,
-  					keep_fargs:false
-  				}
-  			}),
-  			new webpack.optimize.CommonsChunkPlugin({
-  				names:['app','vendor'],
-  				async:true
-  			}),
-  			new webpack.optimize.AggressiveMergingPlugin(),
-  			//This plugin ensures that there are no assets emitted that include errors
-  			new webpack.NoErrorsPlugin(),
-  			new webpack.DefinePlugin({
-  				'__PROD__':JSON.stringify(true),
-  				'__DEV__':JSON.stringify(false),
-  				'__CLIENT__':JSON.stringify(true),
-  				'__SERVER__':JSON.stringify(false)
-  			}),
-  			new ExtractTextPlugin("css/[name].[chunkhash].css")
-
-
-  	]
+  	plugins:[
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+			compress:{
+				warnings:false,
+				drop_console:true,
+				keep_fargs:false
+			}
+		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			names:['app','vendor'],
+			async:true
+		}),
+		new webpack.optimize.AggressiveMergingPlugin(),
+		//This plugin ensures that there are no assets emitted that include errors
+		new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin({
+			'__PROD__':JSON.stringify(true),
+			'__DEV__':JSON.stringify(false),
+			'__CLIENT__':JSON.stringify(true),
+			'__SERVER__':JSON.stringify(false)
+		}),
+		new ExtractTextPlugin("css/[name].[chunkhash].css")
+	]
 
 
 }
