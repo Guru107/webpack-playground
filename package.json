@@ -4,15 +4,15 @@
   "description": "A webpack build setup",
   "main": "index.js",
   "scripts": {
-  	"clean":"rimraf build",
+    "clean": "rimraf build",
+    "start:iso":"NODE_ENV=development node ./webpack/index.js",
     "start:dev": "NODE_ENV=development webpack-dev-server --config webpack/config.dev.client.js",
-    "start:prod":"cross-env NODE_ENV=production webpack -p --config webpack/config.prod.client.js",
+    "start:prod": "cross-env NODE_ENV=production webpack -p --config webpack/config.prod.client.js",
     "start:server": "NODE_ENV=development webpack --config webpack/config.dev.server.js && node build/backend.js",
     "start": "webpack --config webpack/config.dev.client.js && webpack --config webpack/config.dev.server.js && node build/backend.js",
     "lint:js": "eslint './src/**' --ext .js --ext .jsx --ignore-path .gitignore --cache",
-    "lint:less":"lessc --lint styles/**/*",
+    "lint:less": "lessc --lint styles/**/*",
     "check": "npm run lint:js && npm run lint:less"
-
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1",
-    "redis": "^2.6.2"
+    "redis": "^2.6.2",
+    "webpack-isomorphic-tools": "^2.5.7"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -64,6 +65,8 @@
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }

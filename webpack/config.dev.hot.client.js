@@ -1,13 +1,19 @@
 /**
-	This runs well with webpack-dev-server
+	This is created to work with webpack hot middleware
+	There is no difference between this and config.dev.client.js
+	just the webpack-hot-middleware in 'entry' property and removed HtmlWebpackPlugin.
+
+	PS:Feeling lazy
+
 */
 var path = require('path')
+var fs = require('fs')
 var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 var WebpackToolsPlugin = require('webpack-isomorphic-tools/plugin')
 var webpackToolsConfig = require('./webpack.isomorphic.tools')
 var precss       = require('precss')
 var autoprefixer = require('autoprefixer')
+
 const PATHS = {
 	SRC:path.join(__dirname,'..','src'),
 	CLIENT:path.join(__dirname,'..','src/client'),
@@ -18,11 +24,26 @@ const PATHS = {
 	NODE_MODULES:path.join(__dirname,'..','node_modules')
 }
 
+// Globals
+const NODE_ENV = process.env.NODE_ENV || 'development'
+global.__DEV__ = NODE_ENV !== 'production'
+global.__PROD__ = NODE_ENV === 'production'
+global.__SERVER__ = true
+global.__CLIENT__ = false
+
+var nodeModules = {};
+fs.readdirSync('node_modules')
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
+ })
+
 module.exports = {
-	target:'web',
 	context:PATHS.SRC,
 	devtool: 'eval-source-map',
-	entry:[PATHS.CLIENT,'webpack-dev-server/client?http://localhost:8080','webpack/hot/dev-server'],
+	entry:[PATHS.CLIENT,'webpack-hot-middleware/client?path=/__what&timeout=2000&overlay=true'],
 	devServer:{
 		contentBase:'./build',
 		hot:true,
@@ -66,7 +87,7 @@ module.exports = {
 	//recordsPath:PATHS.BUILD+'/asset.json',
 	output:{
 		path:PATHS.BUILD,
-		publicPath:'/',
+		publicPath:'/static/',
 		filename:'bundle.js',
 		//Don't use it in production
 		//Includes comments with info about the module
@@ -108,17 +129,13 @@ module.exports = {
   	plugins:[
   			new webpack.optimize.OccurenceOrderPlugin(),
   			new webpack.HotModuleReplacementPlugin(),
-  			new HtmlWebpackPlugin({
-  				mobile:true,
-  				inject:true
-  			}),
+  			new WebpackToolsPlugin(webpackToolsConfig).development(__DEV__),
   			new webpack.DefinePlugin({
-  				'__PROD__':JSON.stringify(false),
-  				'__DEV__':JSON.stringify(true),
-  				'__CLIENT__':JSON.stringify(true),
-  				'__SERVER__':JSON.stringify(false)
-  			}),
-  			new WebpackToolsPlugin(webpackToolsConfig).development(__DEV__)
+  				__DEV__,
+        		__PROD__,
+        		__SERVER__,
+        		__CLIENT__
+  			})
 
   	]
 }

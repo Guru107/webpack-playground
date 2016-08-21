@@ -1,31 +1,30 @@
 import express from 'express'
-import path from 'path'
 
-import React from 'react'
+const server = express()
 
-import { match,createMemoryHistory,RouterContext,useRouterHistory } from 'react-router'
-import { renderToString } from 'react-dom/server'
-import getRoutes from 'routes'
-import Html from 'Html'
-const app = express()
-let publicPath = path.join(process.cwd(),'build')
-app.use('/static', express.static(publicPath,{setHeaders:(res)=>{
-		res.set('Service-Worker-Allowed','/')
-}}))
-console.log(publicPath)
-app.get('*',(req,res)=>{
-	const routes = getRoutes()
-	const history = useRouterHistory(createMemoryHistory)({})
-	let component = ''
-	match({history,routes:routes, location:req.originalUrl},(error, redirectLocation, renderProps)=>{
-		if(renderProps){
-			component = renderToString(<RouterContext {...renderProps}/>)
-			const html = `<!DOCTYPE html>${renderToString(<Html component={component}/>)}`
-			res.status(200).send(html)
+if(__DEV__){
+	console.log('bootup - __DEV__')
+	const webpack = require('../../webpack/webpack-server').default
+
+	webpack(server)
+}else{
+	let publicPath = path.join(process.cwd(),'build')
+	server.use('/static', express.static(publicPath,{setHeaders:(res)=>{
+			res.set('Service-Worker-Allowed','/')
+	}}))
+}
+
+server.get('*',(req,res)=>{
+	const { render } = require('./app')
+	render(req.originalUrl).then((renderArgs)=>{
+		const { status,redirect,body } = renderArgs
+		res.status(status)
+		if(redirect){
+			res.redirect(redirect)
+		}else{
+			res.send(body)
 		}
 	})
 })
 
-app.listen(3000,()=>{
-	console.info('Listening to port:3000')
-})
+export default server

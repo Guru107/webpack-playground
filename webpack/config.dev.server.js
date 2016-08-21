@@ -1,9 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
 var fs = require('fs')
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var precss = require('precss')
 var autoprefixer = require('autoprefixer')
+
+
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -37,7 +38,7 @@ module.exports = {
 		loaders:[
 			{
   				test:/\.less$/,
-  				loader:ExtractTextPlugin.extract('style-loader','css!less?lint&noIeCompat&strictImports&strictUnits!postcss-loader?sourceMap=inline&pack=cleaner'),
+  				loader:'style-loader!css!less?lint&noIeCompat&strictImports&strictUnits!postcss-loader?sourceMap=inline&pack=cleaner',
   				exclude:['/node_modules/',PATHS.SRC],
   				include:PATHS.STYLES
   			},
@@ -79,13 +80,12 @@ module.exports = {
 	profile:true,
 	plugins:[
   			new webpack.optimize.OccurenceOrderPlugin(),
+  			new webpack.HotModuleReplacementPlugin(),
   			new webpack.DefinePlugin({
   				'__PROD__':JSON.stringify(false),
   				'__DEV__':JSON.stringify(true),
   				'__CLIENT__':JSON.stringify(false),
   				'__SERVER__':JSON.stringify(true)
-  			}),
-  			new ExtractTextPlugin("[name].css")
-
+  			})
   	]
 }

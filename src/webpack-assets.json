@@ -1,0 +1,11 @@
+{
+  "javascript": {
+    "main": "/bundle.js"
+  },
+  "styles": {},
+  "assets": {
+    "../styles/app/index.less": {
+      "_style": "body .label {\n  color: red;\n  font-size: 12px;\n  -webkit-transition: all 0.5s ease;\n  -o-transition: all 0.5s ease;\n  -moz-transition: all 0.5s ease;\n  transition: all 0.5s ease;\n  border: 1px solid;\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSTtRQUNJLFdBQVc7UUFDWCxnQkFBZ0I7UUFDaEIsa0NBQTBCO1FBQTFCLDZCQUEwQjtRQUExQiwrQkFBMEI7UUFBMUIsMEJBQTBCO1FBQzFCLGtCQUFrQjtRQUNsQixtQkFBbUI7S0FDdEI7Q0FDSiIsImZpbGUiOiJpbmRleC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gICAgLmxhYmVsIHtcbiAgICAgICAgY29sb3I6IHJlZDtcbiAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC41cyBlYXNlO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZDtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIH1cbn1cblxuIl19 */\n"
+    }
+  }
+}
